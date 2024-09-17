@@ -3,7 +3,7 @@ require('dotenv').config();
 
 
 exports.connectdb = ()=>{   
-    mongoose.connect(process.env.url)
+    mongoose.connect(process.env.URL)
     .then(()=>{
         console.log("connected to MOngo db")
     })

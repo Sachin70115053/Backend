@@ -1,4 +1,5 @@
 const express = require('express');
+const path=require('path')
 
 const { connectdb } = require('./config/connection.js');
 const User = require('./Models/User');
@@ -6,6 +7,7 @@ const User = require('./Models/User');
 require('dotenv').config();
 
 const app = express();
+app.use(express.static(path.join(__dirname ,'public', 'build','index.html')))
 
 
 connectdb();
@@ -60,6 +62,9 @@ app.get('/api/v1/fetch', async (req, res) => {
     }
 });
 
+app.use('*',(req,res)=>{
+    res.sendFile(path.join(__dirname , 'public','build','index.html'))
+})
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is started on port ${process.env.PORT}`);
